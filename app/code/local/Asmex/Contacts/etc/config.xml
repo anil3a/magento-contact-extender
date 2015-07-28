@@ -1,31 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<modules>
-		<Asmex_Contacts>
-			<version>1.0.0</version>
-		</Asmex_Contacts>
-	</modules>
-
-	<frontend>
-        <routers>
-            <contactsus>
-                <use>standard</use>
-                <args>
-                    <modules>
-                        <module>Asmex_Contacts</module>
-                        <frontName>contacts</frontName>
-                    </modules>
-                </args>
-            </contactsus>
-            <contacts>
-                <args>
-                    <modules>
-                        <Asmex_Contacts before="Mage_Contacts">Asmex_Contacts</Asmex_Contacts>
-                    </modules>
-                </args>
-            </contacts> 
-        </routers>
-    </frontend>
+    <modules>
+        <Asmex_Contacts>
+            <version>1.0.0</version>
+        </Asmex_Contacts>
+    </modules>
 
     <global>
     <!-- Sets a helper class for the module, when overriding contacts this is also essential. -->   
@@ -33,7 +12,9 @@
             <contactsus>
                 <class>Asmex_Contacts_Helper</class>
             </contactsus>
-        </helpers>        
+        </helpers>
+
+       
     </global>
 
 </config>

@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<!-- 
+<?php
+/**
+ * Asmex
+ *
+ * @category   Asmex
+ * @package    Asmex_Contactsus
+ * @author     Anil Prajapati <anilprz3@gmail.com>
+ * @copyright  Copyright (c) 2013 Asmex. (http://www.asmex.com.au)
+ */
+ -->
+<config>
+    <modules>
+        <Asmex_Contactsus>
+            <version>1.0.0</version>
+        </Asmex_Contactsus>
+    </modules>
+    <frontend>
+        <routers>
+            <contactsus>
+                <use>standard</use>
+                <args>
+                    <module>Asmex_Contactsus</module>
+                    <frontName>contactsus</frontName>
+                </args>
+            </contactsus>
+            <contacts>
+                <args>
+                    <modules>
+                        <Asmex_Contactsus before="Mage_Contacts">Asmex_Contactsus</Asmex_Contactsus>
+                    </modules>
+                </args>
+            </contacts> 
+        </routers>
+        <layout>
+            <updates>
+                <contactsus>
+                    <file>contactsus.xml</file>
+                </contactsus>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<contactsus>
+				<use>admin</use>
+				<args>
+					<module>Asmex_Contactsus</module>
+					<frontName>contactsus</frontName>
+				</args>
+			</contactsus>
+        </routers>
+    </admin>
+    <adminhtml>
+		<layout>
+			<updates>
+				<contactsus>
+					<file>contactsus.xml</file>
+				</contactsus>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <contactsus>
+                <class>Asmex_Contactsus_Model</class>
+                <resourceModel>contactsus_mysql4</resourceModel>
+            </contactsus>
+            <contactsus_mysql4>
+                <class>Asmex_Contactsus_Model_Mysql4</class>
+                <entities>
+                    <contactsus>
+                        <table>contactsusemail</table>
+                    </contactsus>
+                </entities>
+            </contactsus_mysql4>
+        </models>
+        <resources>
+            <contactsus_setup>
+                <setup>
+                    <module>Asmex_Contactsus</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </contactsus_setup>
+            <contactsus_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </contactsus_write>
+            <contactsus_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </contactsus_read>
+        </resources>
+        <blocks>
+            <contactsus>
+                <class>Asmex_Contactsus_Block</class>
+            </contactsus>
+        </blocks>
+        <helpers>
+            <contactsus>
+                <class>Asmex_Contactsus_Helper</class>
+            </contactsus>
+        </helpers>
+        
+    </global>
+    <default>
+        <contactsus>
+                <general>
+                        <enable_save>1</enable_save>
+                </general>
+        </contactsus>
+    </default>
+</config>

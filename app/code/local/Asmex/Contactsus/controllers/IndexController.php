@@ -1,21 +1,16 @@
 <?php
 /**
- * Magento
+ * Asmex
  *
- * This is Mage Contacts Module Controller's Action Overrider
- */
-
-/**
- * Contacts index controller
- *
- * @category   ASMEX
- * @package    Amsex_Contacts
- * @author     ASMEX Developer Team <anilprz3@gmail.com>
+ * @category   Asmex
+ * @package    Asmex_Contactsus
+ * @author     Anil Prajapati <anilprz3@gmail.com>
+ * @copyright  Copyright (c) 2013 Asmex. (http://www.asmex.com.au)
  */
 
 require_once Mage::getModuleDir('controllers', "Mage_Contacts").DS."IndexController.php";
 
-class Asmex_Contacts_IndexController extends Mage_Contacts_IndexController
+class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
 {
     public function preDispatch()
     {
@@ -40,6 +35,24 @@ class Asmex_Contacts_IndexController extends Mage_Contacts_IndexController
             try {
                 $postObject = new Varien_Object();
                 $postObject->setData($post);
+                
+                Mage::log(json_encode($post), null, 'contactus.log');
+                
+                $model = Mage::getModel('contactsus/contactsus');
+                
+                $contact_form_data = $model->setDataTemplateForStoring($post);
+                
+                $isSaveEnabled = Mage::getStoreConfig('contactsus/general/enable_save');
+                
+                if($isSaveEnabled){
+                    try {
+                        $model->setData( array( 'email' => Mage::getStoreConfig(self::XML_PATH_EMAIL_RECIPIENT), 'message' => $contact_form_data ) );
+                        $model->setCreatedTime(now());
+                        $model->save();
+                    } catch (Exception $e) {
+                        Mage::log($e->getMessage(), null, 'contactus.log');
+                    }
+                }
 
                 $error = false;
 
@@ -60,6 +73,7 @@ class Asmex_Contacts_IndexController extends Mage_Contacts_IndexController
                 }
 
                 if ($error) {
+                    Mage::log('Form data Error', null, 'contactus.log');
                     throw new Exception();
                 }
                 $mailTemplate = Mage::getModel('core/email_template');
@@ -75,6 +89,7 @@ class Asmex_Contacts_IndexController extends Mage_Contacts_IndexController
                     );
 
                 if (!$mailTemplate->getSentSuccess()) {
+                    Mage::log('Form Sent not Success', null, 'contactus.log');
                     throw new Exception();
                 }
 
@@ -85,6 +100,9 @@ class Asmex_Contacts_IndexController extends Mage_Contacts_IndexController
 
                 return;
             } catch (Exception $e) {
+                
+                Mage::log($e->getMessage(), null, 'contactus.log');
+                
                 $translate->setTranslateInline(true);
 
                 Mage::getSingleton('customer/session')->addError(Mage::helper('contacts')->__('Unable to submit your request. Please, try again later'));
