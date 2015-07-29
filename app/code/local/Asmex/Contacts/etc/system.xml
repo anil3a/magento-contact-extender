@@ -1,11 +1,4 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Magento Contact Form email extender
- *
- * This is for overriding the validation of email as well as one email limit to multiple emails
- */
--->
 <config>
     <sections>
         <contacts translate="label" module="contacts">

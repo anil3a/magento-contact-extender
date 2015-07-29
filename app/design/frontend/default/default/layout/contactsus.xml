@@ -1,13 +1,4 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Asmex Magento Contacts extender Module
- *
- * @category    design
- * @package     Asmex_Contacts_default
- * @copyright   Copyright (c) 2015
- */
--->
 <layout version="0.1.0">
     <default>
         <reference name="footer_links">

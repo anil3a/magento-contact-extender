@@ -5,7 +5,7 @@
  * @category   Asmex
  * @package    Asmex_Contactsus
  * @author     Anil Prajapati <anilprz3@gmail.com>
- * @copyright  Copyright (c) 2013 Asmex. (http://www.asmex.com.au)
+ * @copyright  Copyright (c) 2015 Asmex. (http://www.asmex.com.au)
  */
 
 require_once Mage::getModuleDir('controllers', "Mage_Contacts").DS."IndexController.php";

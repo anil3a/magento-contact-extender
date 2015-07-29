@@ -1,17 +1,14 @@
 <?xml version="1.0"?>
 <!--
 /**
- * ASMEX
+ * Asmex
  *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade or update
- * please contact software developer at anilprz3@gmail.com
- *
- * @category    ASMEX
- * @package     ASMEX_Contacts
- * @copyright   Copyright (c) 2015 
+ * @category   Asmex
+ * @package    Asmex_Contactsus
+ * @author     Anil Prajapati <anilprz3@gmail.com>
+ * @copyright  Copyright (c) 2015 Asmex. (http://www.asmex.com.au)
  */
+
 -->
 <config>
     <modules>

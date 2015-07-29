@@ -1,19 +1,8 @@
 <?xml version="1.0"?>
-<!-- 
-<?php
-/**
- * Asmex
- *
- * @category   Asmex
- * @package    Asmex_Contactsus
- * @author     Anil Prajapati <anilprz3@gmail.com>
- * @copyright  Copyright (c) 2013 Asmex. (http://www.asmex.com.au)
- */
- -->
 <config>
     <modules>
         <Asmex_Contactsus>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </Asmex_Contactsus>
     </modules>
     <frontend>

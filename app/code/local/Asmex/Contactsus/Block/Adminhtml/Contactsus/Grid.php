@@ -5,7 +5,7 @@
  * @category   Asmex
  * @package    Asmex_Contactsus
  * @author     Anil Prajapati <anilprz3@gmail.com>
- * @copyright  Copyright (c) 2013 Asmex. (http://www.asmex.com.au)
+ * @copyright  Copyright (c) 2015 Asmex. (http://www.asmex.com.au)
  */
 
 class Asmex_Contactsus_Block_Adminhtml_Contactsus_Grid extends Mage_Adminhtml_Block_Widget_Grid
@@ -89,23 +89,6 @@ class Asmex_Contactsus_Block_Adminhtml_Contactsus_Grid extends Mage_Adminhtml_Bl
              'url'      => $this->getUrl('*/*/massDelete'),
              'confirm'  => Mage::helper('contactsus')->__('Are you sure?')
         ));
-
-//        $statuses = Mage::getSingleton('contactsus/status')->getOptionArray();
-//
-//        array_unshift($statuses, array('label'=>'', 'value'=>''));
-//        $this->getMassactionBlock()->addItem('status', array(
-//             'label'=> Mage::helper('contactsus')->__('Change status'),
-//             'url'  => $this->getUrl('*/*/massStatus', array('_current'=>true)),
-//             'additional' => array(
-//                    'visibility' => array(
-//                         'name' => 'status',
-//                         'type' => 'select',
-//                         'class' => 'required-entry',
-//                         'label' => Mage::helper('contactsus')->__('Status'),
-//                         'values' => $statuses
-//                     )
-//             )
-//        ));
         return $this;
     }
 
