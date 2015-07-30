@@ -21,14 +21,18 @@ class Asmex_Contactsus_Model_Contactsus extends Mage_Core_Model_Abstract
         if( !empty( $data )){
             
             $storing_data = "";
+            $storing_data_email = "";
             
             foreach ( $data as $field => $value ){
                 if( $field != 'hideit' ){
                     $storing_data .= "".$field."\n";
                     $storing_data .= "".$value."\n\n";
                 }
+                if( $field == 'email') {
+                    $storing_data_email = $value;
+                }
             }
-            return $storing_data;
+            return array( 'message' => $storing_data, 'customer_email' => $storing_data_email );
         }
         return false;
         

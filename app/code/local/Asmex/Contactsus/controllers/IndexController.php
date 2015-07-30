@@ -36,7 +36,7 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
                 $postObject = new Varien_Object();
                 $postObject->setData($post);
                 
-                Mage::log(json_encode($post), null, 'contactus.log');
+                
                 
                 $model = Mage::getModel('contactsus/contactsus');
                 
@@ -46,10 +46,11 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
                 
                 if($isSaveEnabled){
                     try {
-                        $model->setData( array( 'email' => Mage::getStoreConfig(self::XML_PATH_EMAIL_RECIPIENT), 'message' => $contact_form_data ) );
+                        $model->setData( array( 'email' => $contact_form_data['customer_email'], 'message' => $contact_form_data['message'] ) );
                         $model->setCreatedTime(now());
                         $model->save();
                     } catch (Exception $e) {
+                        Mage::log(json_encode($post), null, 'contactus.log');
                         Mage::log($e->getMessage(), null, 'contactus.log');
                     }
                 }
