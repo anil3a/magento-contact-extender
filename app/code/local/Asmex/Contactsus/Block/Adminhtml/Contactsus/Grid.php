@@ -15,7 +15,7 @@ class Asmex_Contactsus_Block_Adminhtml_Contactsus_Grid extends Mage_Adminhtml_Bl
       parent::__construct();
       $this->setId('contactsusGrid');
       $this->setDefaultSort('contactemails_id');
-      $this->setDefaultDir('DSC');
+      $this->setDefaultDir('DESC');
       $this->setSaveParametersInSession(true);
   }
 

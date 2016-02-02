@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Asmex_WysiwygFiles>
+      <active>true</active>
+      <codePool>local</codePool>
+    </Asmex_WysiwygFiles>
+  </modules>
+</config>

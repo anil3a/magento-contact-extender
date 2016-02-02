@@ -77,12 +77,19 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
                     Mage::log('Form data Error', null, 'contactus.log');
                     throw new Exception();
                 }
+
+		if( !empty( trim($post['email_template'])) ) {
+                        $templateId = $post['email_template'];
+                } else {
+                        $templateId = Mage::getStoreConfig(self::XML_PATH_EMAIL_TEMPLATE);
+                }
+
                 $mailTemplate = Mage::getModel('core/email_template');
                 /* @var $mailTemplate Mage_Core_Model_Email_Template */
                 $mailTemplate->setDesignConfig(array('area' => 'frontend'))
                     ->setReplyTo($post['email'])
                     ->sendTransactional(
-                        Mage::getStoreConfig(self::XML_PATH_EMAIL_TEMPLATE),
+                        $templateId,
                         Mage::getStoreConfig(self::XML_PATH_EMAIL_SENDER),
                         explode(',', Mage::getStoreConfig(self::XML_PATH_EMAIL_RECIPIENT)),
                         null,
@@ -97,8 +104,8 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
                 $translate->setTranslateInline(true);
 
                 Mage::getSingleton('customer/session')->addSuccess(Mage::helper('contacts')->__('Your inquiry was submitted and will be responded to as soon as possible. Thank you for contacting us.'));
-                $this->_redirect('*/*/');
-
+                //$this->_redirect('*/*/');
+		header("Location: " . $_SERVER["HTTP_REFERER"]); exit;
                 return;
             } catch (Exception $e) {
                 
@@ -107,13 +114,17 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
                 $translate->setTranslateInline(true);
 
                 Mage::getSingleton('customer/session')->addError(Mage::helper('contacts')->__('Unable to submit your request. Please, try again later'));
-                $this->_redirect('*/*/');
+                //$this->_redirect('*/*/');
+		header("Location: " . $_SERVER["HTTP_REFERER"]); exit;
                 return;
             }
 
         } else {
-            $this->_redirect('*/*/');
+            //$this->_redirect('*/*/');
+	    header("Location: " . $_SERVER["HTTP_REFERER"]); exit;
         }
     }
+    
 
 }
+
