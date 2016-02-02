@@ -36,8 +36,6 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
                 $postObject = new Varien_Object();
                 $postObject->setData($post);
                 
-                
-                
                 $model = Mage::getModel('contactsus/contactsus');
                 
                 $contact_form_data = $model->setDataTemplateForStoring($post);
@@ -61,10 +59,6 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
                     $error = true;
                 }
 
-                if (!Zend_Validate::is(trim($post['comment']) , 'NotEmpty')) {
-                    $error = true;
-                }
-
                 if (!Zend_Validate::is(trim($post['email']), 'EmailAddress')) {
                     $error = true;
                 }
@@ -78,8 +72,8 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
                     throw new Exception();
                 }
 
-		if( !empty( trim($post['email_template'])) ) {
-                        $templateId = $post['email_template'];
+		if( !empty( $post['email_template']) ) {
+                        $templateId = trim($post['email_template']);
                 } else {
                         $templateId = Mage::getStoreConfig(self::XML_PATH_EMAIL_TEMPLATE);
                 }
@@ -105,7 +99,7 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
 
                 Mage::getSingleton('customer/session')->addSuccess(Mage::helper('contacts')->__('Your inquiry was submitted and will be responded to as soon as possible. Thank you for contacting us.'));
                 //$this->_redirect('*/*/');
-		header("Location: " . $_SERVER["HTTP_REFERER"]); exit;
+		        header("Location: " . $_SERVER["HTTP_REFERER"]); exit;
                 return;
             } catch (Exception $e) {
                 
@@ -115,13 +109,13 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
 
                 Mage::getSingleton('customer/session')->addError(Mage::helper('contacts')->__('Unable to submit your request. Please, try again later'));
                 //$this->_redirect('*/*/');
-		header("Location: " . $_SERVER["HTTP_REFERER"]); exit;
+		        header("Location: " . $_SERVER["HTTP_REFERER"]); exit;
                 return;
             }
 
         } else {
             //$this->_redirect('*/*/');
-	    header("Location: " . $_SERVER["HTTP_REFERER"]); exit;
+	        header("Location: " . $_SERVER["HTTP_REFERER"]); exit;
         }
     }
     
