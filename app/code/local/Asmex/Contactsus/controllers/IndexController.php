@@ -34,10 +34,38 @@ class Asmex_Contactsus_IndexController extends Mage_Contacts_IndexController
             $translate->setTranslateInline(false);
             try {
                 $postObject = new Varien_Object();
+		$gRecaptcha = '';
+                if ( isset($post['g-recaptcha-response']) )
+                {
+                    $gRecaptcha = $post['g-recaptcha-response'];
+                    unset($post['g-recaptcha-response']);
+                }
+		if ( empty($gRecaptcha) ) {
+		    Mage::getSingleton('customer/session')->addError(Mage::helper('contacts')->__('Please validate google captcha.'));
+		    $this->_redirect('*/');
+		    return;
+		}
+
+		// Google ReCaptcha Key
+	        $secretKey = " GOOGLE RECAPTCH SECRETE SITE KEY ";
+
+	        $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($gRecaptcha);
+	        $response = file_get_contents($url);
+	        if(empty($response)){
+		    Mage::getSingleton('customer/session')->addError(Mage::helper('contacts')->__('Unable to submit form, please contact by email directly.'));
+		    $this->_redirect('*/');
+		    return;
+	    	}
+	        $responseKeys = json_decode($response,true);
+	        if(empty($responseKeys["success"])){
+		    Mage::getSingleton('customer/session')->addError(Mage::helper('contacts')->__('Unable to submit form, please contact by email directly!'));
+		    $this->_redirect('*/');
+	        }
+    
                 $postObject->setData($post);
-                
+
                 $model = Mage::getModel('contactsus/contactsus');
-                
+
                 $contact_form_data = $model->setDataTemplateForStoring($post);
                 
                 $isSaveEnabled = Mage::getStoreConfig('contactsus/general/enable_save');
